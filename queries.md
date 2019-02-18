@@ -100,4 +100,16 @@ FROM customers
 LEFT JOIN orders
 ON customers.customerid=orders.customerid
 GROUP BY customername;
+
+-- better way (maybe?) to select which to delete
+SELECT *
+FROM customers
+LEFT JOIN orders
+ON customers.customerid=orders.customerid
+WHERE orderid is null;
+
+-- this way works!
+DELETE FROM customers
+WHERE customerid NOT IN (
+SELECT customerid FROM orders);
 ```
